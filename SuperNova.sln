@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperNova", "SuperNova\SuperNova.csproj", "{344032B5-B6A1-4414-8B37-8B5FC540DADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperNovaDataBase", "SuperNovaDataBase\SuperNovaDataBase.csproj", "{19812A5E-95DC-4098-8C13-03CD93F32B97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{344032B5-B6A1-4414-8B37-8B5FC540DADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{344032B5-B6A1-4414-8B37-8B5FC540DADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{344032B5-B6A1-4414-8B37-8B5FC540DADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{344032B5-B6A1-4414-8B37-8B5FC540DADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19812A5E-95DC-4098-8C13-03CD93F32B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19812A5E-95DC-4098-8C13-03CD93F32B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19812A5E-95DC-4098-8C13-03CD93F32B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19812A5E-95DC-4098-8C13-03CD93F32B97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3701CE7-681C-491F-9E55-4337CCE63C59}
+	EndGlobalSection
+EndGlobal
