@@ -23,7 +23,7 @@ namespace SuperNova.Controllers
         [HttpGet]
         public HttpResponseMessage getcliente()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, msg = "Amigo Estou aqui" }); ;
+            return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, msg = "Amigos Estou aqui" }); ;
         }
 
     }
