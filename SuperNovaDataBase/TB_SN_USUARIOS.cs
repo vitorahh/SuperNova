@@ -12,9 +12,13 @@ namespace SuperNovaDataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_SN_CLIENTE
+    public partial class TB_SN_USUARIOS
     {
-        public int ID_CLIENTE { get; set; }
-        public string DS_CLIENTE { get; set; }
+        public int ID_USUARIO { get; set; }
+        public string DS_NOME_USUARIO { get; set; }
+        public string DS_LOGIN_USUARIO { get; set; }
+        public string DS_PASSWORD_USUARIO { get; set; }
+        public bool FL_STATUS_USUARIO { get; set; }
+        public string DS_IMG_USUARIO { get; set; }
     }
 }

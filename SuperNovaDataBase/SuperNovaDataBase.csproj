@@ -55,6 +55,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SN_sp_ListaFacas_Result.cs">
+      <DependentUpon>SUPER_NOVA.tt</DependentUpon>
+    </Compile>
     <Compile Include="SUPER_NOVA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,7 +73,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SUPER_NOVA.edmx</DependentUpon>
     </Compile>
-    <Compile Include="TB_SN_CLIENTE.cs">
+    <Compile Include="TB_SN_FACAS.cs">
+      <DependentUpon>SUPER_NOVA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_SN_MAQUINA_FACAS.cs">
+      <DependentUpon>SUPER_NOVA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_SN_TIPO_FACAS.cs">
+      <DependentUpon>SUPER_NOVA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_SN_USUARIOS.cs">
       <DependentUpon>SUPER_NOVA.tt</DependentUpon>
     </Compile>
   </ItemGroup>

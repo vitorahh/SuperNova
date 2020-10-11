@@ -4,43 +4,286 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SUPER_NOVAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="TB_SN_CLIENTE">
+    <Schema Namespace="SUPER_NOVAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_SN_FACAS">
           <Key>
-            <PropertyRef Name="ID_CLIENTE" />
+            <PropertyRef Name="ID_FACA" />
           </Key>
-          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DS_CLIENTE" Type="varchar" MaxLength="350" Nullable="false" />
+          <Property Name="ID_FACA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_MAQUINA_FACA" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_FACAS" Type="int" Nullable="false" />
+          <Property Name="VL_LARGURA_FACA" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="VL_ALTURA_FACA" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NR_FACA" Type="int" Nullable="false" />
+          <Property Name="NR_COLUNAS_FACA" Type="int" Nullable="false" />
+          <Property Name="NR_LINHAS_FACA" Type="int" Nullable="false" />
+          <Property Name="DS_CAIXA_FACA" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="DS_CLIENTE_FACA" Type="varchar" MaxLength="150" />
+          <Property Name="DS_OBSERVACAO" Type="varchar" MaxLength="150" />
+          <Property Name="DS_URL_IMG" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="TB_SN_MAQUINA_FACAS">
+          <Key>
+            <PropertyRef Name="ID_MAQUINA_FACA" />
+          </Key>
+          <Property Name="ID_MAQUINA_FACA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DS_MAQUINA_FACA" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_SN_TIPO_FACAS">
+          <Key>
+            <PropertyRef Name="ID_TIPO_FACAS" />
+          </Key>
+          <Property Name="ID_TIPO_FACAS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DS_TIPO_FACAS" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_SN_USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DS_NOME_USUARIO" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DS_LOGIN_USUARIO" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DS_PASSWORD_USUARIO" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FL_STATUS_USUARIO" Type="bit" Nullable="false" />
+          <Property Name="DS_IMG_USUARIO" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_MAQUINA_FACA">
+          <End Role="TB_SN_MAQUINA_FACAS" Type="Self.TB_SN_MAQUINA_FACAS" Multiplicity="1" />
+          <End Role="TB_SN_FACAS" Type="Self.TB_SN_FACAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SN_MAQUINA_FACAS">
+              <PropertyRef Name="ID_MAQUINA_FACA" />
+            </Principal>
+            <Dependent Role="TB_SN_FACAS">
+              <PropertyRef Name="ID_MAQUINA_FACA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_FACA">
+          <End Role="TB_SN_TIPO_FACAS" Type="Self.TB_SN_TIPO_FACAS" Multiplicity="1" />
+          <End Role="TB_SN_FACAS" Type="Self.TB_SN_FACAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SN_TIPO_FACAS">
+              <PropertyRef Name="ID_TIPO_FACAS" />
+            </Principal>
+            <Dependent Role="TB_SN_FACAS">
+              <PropertyRef Name="ID_TIPO_FACAS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SN_sp_ListaFacas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_FACA" Type="int" Mode="In" />
+          <Parameter Name="ID_MAQUINA_FACA" Type="int" Mode="In" />
+          <Parameter Name="ID_TIPO_FACAS" Type="int" Mode="In" />
+          <Parameter Name="VL_ALTURA_FACA" Type="decimal" Mode="In" />
+          <Parameter Name="VL_LARGURA_FACA" Type="decimal" Mode="In" />
+          <Parameter Name="NR_FACA" Type="int" Mode="In" />
+          <Parameter Name="NR_COLUNAS_FACA" Type="int" Mode="In" />
+          <Parameter Name="NR_LINHAS_FACA" Type="int" Mode="In" />
+          <Parameter Name="DS_CAIXA_FACA" Type="varchar" Mode="In" />
+          <Parameter Name="DS_CLIENTE_FACA" Type="varchar" Mode="In" />
+          <Parameter Name="DS_OBSERVACAO" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="SUPER_NOVAModelStoreContainer">
-          <EntitySet Name="TB_SN_CLIENTE" EntityType="Self.TB_SN_CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SN_FACAS" EntityType="Self.TB_SN_FACAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SN_MAQUINA_FACAS" EntityType="Self.TB_SN_MAQUINA_FACAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SN_TIPO_FACAS" EntityType="Self.TB_SN_TIPO_FACAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SN_USUARIOS" EntityType="Self.TB_SN_USUARIOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MAQUINA_FACA" Association="Self.FK_MAQUINA_FACA">
+            <End Role="TB_SN_MAQUINA_FACAS" EntitySet="TB_SN_MAQUINA_FACAS" />
+            <End Role="TB_SN_FACAS" EntitySet="TB_SN_FACAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_FACA" Association="Self.FK_TIPO_FACA">
+            <End Role="TB_SN_TIPO_FACAS" EntitySet="TB_SN_TIPO_FACAS" />
+            <End Role="TB_SN_FACAS" EntitySet="TB_SN_FACAS" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SUPER_NOVAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="TB_SN_CLIENTE">
-          <Key>
-            <PropertyRef Name="ID_CLIENTE" />
-          </Key>
-          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DS_CLIENTE" Type="String" MaxLength="350" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="SUPER_NOVAEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TB_SN_CLIENTE" EntityType="Self.TB_SN_CLIENTE" />
+          <EntitySet Name="TB_SN_FACAS" EntityType="SUPER_NOVAModel.TB_SN_FACAS" />
+          <EntitySet Name="TB_SN_MAQUINA_FACAS" EntityType="SUPER_NOVAModel.TB_SN_MAQUINA_FACAS" />
+          <EntitySet Name="TB_SN_TIPO_FACAS" EntityType="SUPER_NOVAModel.TB_SN_TIPO_FACAS" />
+          <AssociationSet Name="FK_MAQUINA_FACA" Association="SUPER_NOVAModel.FK_MAQUINA_FACA">
+            <End Role="TB_SN_MAQUINA_FACAS" EntitySet="TB_SN_MAQUINA_FACAS" />
+            <End Role="TB_SN_FACAS" EntitySet="TB_SN_FACAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_FACA" Association="SUPER_NOVAModel.FK_TIPO_FACA">
+            <End Role="TB_SN_TIPO_FACAS" EntitySet="TB_SN_TIPO_FACAS" />
+            <End Role="TB_SN_FACAS" EntitySet="TB_SN_FACAS" />
+          </AssociationSet>
+          <FunctionImport Name="SN_sp_ListaFacas" ReturnType="Collection(SUPER_NOVAModel.SN_sp_ListaFacas_Result)">
+            <Parameter Name="ID_FACA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_MAQUINA_FACA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_TIPO_FACAS" Mode="In" Type="Int32" />
+            <Parameter Name="VL_ALTURA_FACA" Mode="In" Type="Decimal" />
+            <Parameter Name="VL_LARGURA_FACA" Mode="In" Type="Decimal" />
+            <Parameter Name="NR_FACA" Mode="In" Type="Int32" />
+            <Parameter Name="NR_COLUNAS_FACA" Mode="In" Type="Int32" />
+            <Parameter Name="NR_LINHAS_FACA" Mode="In" Type="Int32" />
+            <Parameter Name="DS_CAIXA_FACA" Mode="In" Type="String" />
+            <Parameter Name="DS_CLIENTE_FACA" Mode="In" Type="String" />
+            <Parameter Name="DS_OBSERVACAO" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="TB_SN_USUARIOS" EntityType="SUPER_NOVAModel.TB_SN_USUARIOS" />
         </EntityContainer>
+        <EntityType Name="TB_SN_FACAS">
+          <Key>
+            <PropertyRef Name="ID_FACA" />
+          </Key>
+          <Property Name="ID_FACA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_MAQUINA_FACA" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO_FACAS" Type="Int32" Nullable="false" />
+          <Property Name="VL_LARGURA_FACA" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="VL_ALTURA_FACA" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="NR_FACA" Type="Int32" Nullable="false" />
+          <Property Name="NR_COLUNAS_FACA" Type="Int32" Nullable="false" />
+          <Property Name="NR_LINHAS_FACA" Type="Int32" Nullable="false" />
+          <Property Name="DS_CAIXA_FACA" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="DS_CLIENTE_FACA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DS_OBSERVACAO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_SN_MAQUINA_FACAS" Relationship="SUPER_NOVAModel.FK_MAQUINA_FACA" FromRole="TB_SN_FACAS" ToRole="TB_SN_MAQUINA_FACAS" />
+          <NavigationProperty Name="TB_SN_TIPO_FACAS" Relationship="SUPER_NOVAModel.FK_TIPO_FACA" FromRole="TB_SN_FACAS" ToRole="TB_SN_TIPO_FACAS" />
+          <Property Name="DS_URL_IMG" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TB_SN_MAQUINA_FACAS">
+          <Key>
+            <PropertyRef Name="ID_MAQUINA_FACA" />
+          </Key>
+          <Property Name="ID_MAQUINA_FACA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DS_MAQUINA_FACA" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_SN_FACAS" Relationship="SUPER_NOVAModel.FK_MAQUINA_FACA" FromRole="TB_SN_MAQUINA_FACAS" ToRole="TB_SN_FACAS" />
+        </EntityType>
+        <EntityType Name="TB_SN_TIPO_FACAS">
+          <Key>
+            <PropertyRef Name="ID_TIPO_FACAS" />
+          </Key>
+          <Property Name="ID_TIPO_FACAS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DS_TIPO_FACAS" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_SN_FACAS" Relationship="SUPER_NOVAModel.FK_TIPO_FACA" FromRole="TB_SN_TIPO_FACAS" ToRole="TB_SN_FACAS" />
+        </EntityType>
+        <Association Name="FK_MAQUINA_FACA">
+          <End Type="SUPER_NOVAModel.TB_SN_MAQUINA_FACAS" Role="TB_SN_MAQUINA_FACAS" Multiplicity="1" />
+          <End Type="SUPER_NOVAModel.TB_SN_FACAS" Role="TB_SN_FACAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SN_MAQUINA_FACAS">
+              <PropertyRef Name="ID_MAQUINA_FACA" />
+            </Principal>
+            <Dependent Role="TB_SN_FACAS">
+              <PropertyRef Name="ID_MAQUINA_FACA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_FACA">
+          <End Type="SUPER_NOVAModel.TB_SN_TIPO_FACAS" Role="TB_SN_TIPO_FACAS" Multiplicity="1" />
+          <End Type="SUPER_NOVAModel.TB_SN_FACAS" Role="TB_SN_FACAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SN_TIPO_FACAS">
+              <PropertyRef Name="ID_TIPO_FACAS" />
+            </Principal>
+            <Dependent Role="TB_SN_FACAS">
+              <PropertyRef Name="ID_TIPO_FACAS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SN_sp_ListaFacas_Result">
+          <Property Type="Int32" Name="ID_FACA" Nullable="false" />
+          <Property Type="Int32" Name="ID_MAQUINA_FACA" Nullable="false" />
+          <Property Type="Int32" Name="ID_TIPO_FACAS" Nullable="false" />
+          <Property Type="String" Name="DS_TIPO_FACAS" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="DS_MAQUINA_FACA" Nullable="false" MaxLength="250" />
+          <Property Type="Decimal" Name="VL_ALTURA_FACA" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="VL_LARGURA_FACA" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="NR_FACA" Nullable="false" />
+          <Property Type="Int32" Name="NR_COLUNAS_FACA" Nullable="false" />
+          <Property Type="Int32" Name="NR_LINHAS_FACA" Nullable="false" />
+          <Property Type="String" Name="DS_CAIXA_FACA" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="DS_CLIENTE_FACA" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="DS_OBSERVACAO" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="DS_URL_IMG" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="TB_SN_USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DS_NOME_USUARIO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DS_LOGIN_USUARIO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DS_PASSWORD_USUARIO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FL_STATUS_USUARIO" Type="Boolean" Nullable="false" />
+          <Property Name="DS_IMG_USUARIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SUPER_NOVAModelStoreContainer" CdmEntityContainer="SUPER_NOVAEntities">
-          <EntitySetMapping Name="TB_SN_CLIENTE">
-            <EntityTypeMapping TypeName="SUPER_NOVAModel.TB_SN_CLIENTE">
-              <MappingFragment StoreEntitySet="TB_SN_CLIENTE">
-                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
-                <ScalarProperty Name="DS_CLIENTE" ColumnName="DS_CLIENTE" />
+        <EntitySetMapping Name="TB_SN_FACAS">
+            <EntityTypeMapping TypeName="SUPER_NOVAModel.TB_SN_FACAS">
+              <MappingFragment StoreEntitySet="TB_SN_FACAS">
+                <ScalarProperty Name="DS_URL_IMG" ColumnName="DS_URL_IMG" />
+                <ScalarProperty Name="DS_OBSERVACAO" ColumnName="DS_OBSERVACAO" />
+                <ScalarProperty Name="DS_CLIENTE_FACA" ColumnName="DS_CLIENTE_FACA" />
+                <ScalarProperty Name="DS_CAIXA_FACA" ColumnName="DS_CAIXA_FACA" />
+                <ScalarProperty Name="NR_LINHAS_FACA" ColumnName="NR_LINHAS_FACA" />
+                <ScalarProperty Name="NR_COLUNAS_FACA" ColumnName="NR_COLUNAS_FACA" />
+                <ScalarProperty Name="NR_FACA" ColumnName="NR_FACA" />
+                <ScalarProperty Name="VL_ALTURA_FACA" ColumnName="VL_ALTURA_FACA" />
+                <ScalarProperty Name="VL_LARGURA_FACA" ColumnName="VL_LARGURA_FACA" />
+                <ScalarProperty Name="ID_TIPO_FACAS" ColumnName="ID_TIPO_FACAS" />
+                <ScalarProperty Name="ID_MAQUINA_FACA" ColumnName="ID_MAQUINA_FACA" />
+                <ScalarProperty Name="ID_FACA" ColumnName="ID_FACA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_SN_MAQUINA_FACAS">
+            <EntityTypeMapping TypeName="SUPER_NOVAModel.TB_SN_MAQUINA_FACAS">
+              <MappingFragment StoreEntitySet="TB_SN_MAQUINA_FACAS">
+                <ScalarProperty Name="DS_MAQUINA_FACA" ColumnName="DS_MAQUINA_FACA" />
+                <ScalarProperty Name="ID_MAQUINA_FACA" ColumnName="ID_MAQUINA_FACA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_SN_TIPO_FACAS">
+            <EntityTypeMapping TypeName="SUPER_NOVAModel.TB_SN_TIPO_FACAS">
+              <MappingFragment StoreEntitySet="TB_SN_TIPO_FACAS">
+                <ScalarProperty Name="DS_TIPO_FACAS" ColumnName="DS_TIPO_FACAS" />
+                <ScalarProperty Name="ID_TIPO_FACAS" ColumnName="ID_TIPO_FACAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SN_sp_ListaFacas" FunctionName="SUPER_NOVAModel.Store.SN_sp_ListaFacas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SUPER_NOVAModel.SN_sp_ListaFacas_Result">
+                <ScalarProperty Name="ID_FACA" ColumnName="ID_FACA" />
+                <ScalarProperty Name="ID_MAQUINA_FACA" ColumnName="ID_MAQUINA_FACA" />
+                <ScalarProperty Name="ID_TIPO_FACAS" ColumnName="ID_TIPO_FACAS" />
+                <ScalarProperty Name="DS_TIPO_FACAS" ColumnName="DS_TIPO_FACAS" />
+                <ScalarProperty Name="DS_MAQUINA_FACA" ColumnName="DS_MAQUINA_FACA" />
+                <ScalarProperty Name="VL_ALTURA_FACA" ColumnName="VL_ALTURA_FACA" />
+                <ScalarProperty Name="VL_LARGURA_FACA" ColumnName="VL_LARGURA_FACA" />
+                <ScalarProperty Name="NR_FACA" ColumnName="NR_FACA" />
+                <ScalarProperty Name="NR_COLUNAS_FACA" ColumnName="NR_COLUNAS_FACA" />
+                <ScalarProperty Name="NR_LINHAS_FACA" ColumnName="NR_LINHAS_FACA" />
+                <ScalarProperty Name="DS_CAIXA_FACA" ColumnName="DS_CAIXA_FACA" />
+                <ScalarProperty Name="DS_CLIENTE_FACA" ColumnName="DS_CLIENTE_FACA" />
+                <ScalarProperty Name="DS_OBSERVACAO" ColumnName="DS_OBSERVACAO" />
+                <ScalarProperty Name="DS_URL_IMG" ColumnName="DS_URL_IMG" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TB_SN_USUARIOS">
+            <EntityTypeMapping TypeName="SUPER_NOVAModel.TB_SN_USUARIOS">
+              <MappingFragment StoreEntitySet="TB_SN_USUARIOS">
+                <ScalarProperty Name="DS_IMG_USUARIO" ColumnName="DS_IMG_USUARIO" />
+                <ScalarProperty Name="FL_STATUS_USUARIO" ColumnName="FL_STATUS_USUARIO" />
+                <ScalarProperty Name="DS_PASSWORD_USUARIO" ColumnName="DS_PASSWORD_USUARIO" />
+                <ScalarProperty Name="DS_LOGIN_USUARIO" ColumnName="DS_LOGIN_USUARIO" />
+                <ScalarProperty Name="DS_NOME_USUARIO" ColumnName="DS_NOME_USUARIO" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

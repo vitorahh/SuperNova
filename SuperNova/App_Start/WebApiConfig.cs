@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Net.Http;
-
+using System.Web.Http.Routing;
 
 namespace SuperNova
 {
@@ -12,15 +12,16 @@ namespace SuperNova
         public static void Register(HttpConfiguration config)
         {
             // Serviços e configuração da API da Web
-
+           
             // Rotas da API da Web
             config.MapHttpAttributeRoutes();
-
+            config.EnableCors();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
         }
     }
 }

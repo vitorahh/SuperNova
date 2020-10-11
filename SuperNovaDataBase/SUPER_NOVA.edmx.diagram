@@ -5,7 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b8cc262085c34adb913b8c49f785df69" Name="Diagram1">
-        <EntityTypeShape EntityType="SUPER_NOVAModel.TB_SN_CLIENTE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPER_NOVAModel.TB_SN_FACAS" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="SUPER_NOVAModel.TB_SN_MAQUINA_FACAS" Width="1.5" PointX="3.25" PointY="3.875" />
+        <EntityTypeShape EntityType="SUPER_NOVAModel.TB_SN_TIPO_FACAS" Width="1.5" PointX="3.75" PointY="0.5" />
+        <AssociationConnector Association="SUPER_NOVAModel.FK_MAQUINA_FACA" />
+        <AssociationConnector Association="SUPER_NOVAModel.FK_TIPO_FACA" />
+        <EntityTypeShape EntityType="SUPER_NOVAModel.TB_SN_USUARIOS" Width="1.5" PointX="6.375" PointY="1.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
