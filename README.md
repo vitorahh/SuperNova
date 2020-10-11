@@ -1,5 +1,3 @@
-# SuperNova
-
-<h1> Super nova </h1>
+# Super Nova
 
 <p> Uma Simples API para Graficas usarem no controle de Facas </p>
