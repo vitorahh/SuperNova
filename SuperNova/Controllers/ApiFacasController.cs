@@ -79,7 +79,7 @@ namespace SuperNova.Controllers
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, new { valid = false, msg = "Não foi possivel efetuar o cadastro, verifique os campos digitados." });
+                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = false, msg = "Não foi possivel efetuar o cadastro, verifique os campos digitados." });
                 }
             }
             catch (Exception ex)
@@ -101,12 +101,12 @@ namespace SuperNova.Controllers
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, new { valid = false, msg = "Não foi possivel atualizar a faca, verifique os campos digitados." });
+                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = false, msg = "Não foi possivel atualizar a faca, verifique os campos digitados." });
                 }
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { valid = false, msg = ex.Message });
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = false, msg = ex.Message });
             }
         }
 
@@ -122,7 +122,7 @@ namespace SuperNova.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { valid = false, msg = ex.Message });
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = false, msg = ex.Message });
             }
         }
     }

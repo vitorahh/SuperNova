@@ -19,6 +19,7 @@ namespace SuperNova.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ApiUsuariosController : ApiController
     {
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPut]
         public HttpResponseMessage cadUsuario()
         {

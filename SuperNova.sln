@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperNova", "SuperNova\SuperNova.csproj", "{344032B5-B6A1-4414-8B37-8B5FC540DADF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{19812A5E-95DC-4098-8C13-03CD93F32B97} = {19812A5E-95DC-4098-8C13-03CD93F32B97}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperNovaDataBase", "SuperNovaDataBase\SuperNovaDataBase.csproj", "{19812A5E-95DC-4098-8C13-03CD93F32B97}"
 EndProject
